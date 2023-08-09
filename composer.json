@@ -1,0 +1,12 @@
+{
+    "name": "avishka/phpiggy",
+    "description": "A PHP application for tracking expenses",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Avishka-Rathnavibhushana",
+            "email": "mailavishka@gmail.com"
+        }
+    ],
+    "require": {}
+}
