@@ -1,0 +1,12 @@
+RewriteEngine On 
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^ /index.php [L]
+
+<!-- 
+“For performance optimisations use main configuration file instead of .htaccess”
+* If you don't plan on using the .htaccess file, you should disable it by using the AllowOverride directive. 
+    * AllowOverride none in “httpd-vhosts.conf” file 
+-->
