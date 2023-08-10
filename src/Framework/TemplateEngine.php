@@ -16,10 +16,15 @@ class TemplateEngine
 
         ob_start();
 
-        include "{$this->basePath}/{$template}";
+        include $this->resolve($template);
 
         $output = ob_get_clean();
 
         return $output;
+    }
+
+    public function resolve(string $path): string
+    {
+        return "{$this->basePath}/{$path}";
     }
 }
