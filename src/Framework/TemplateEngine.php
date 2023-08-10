@@ -10,8 +10,9 @@ class TemplateEngine
     {
     }
 
-    public function render(String $template)
+    public function render(String $template, array $data = [])
     {
+        extract($data, EXTR_SKIP);
         include "{$this->basePath}/{$template}";
     }
 }
