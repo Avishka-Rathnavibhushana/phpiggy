@@ -9,3 +9,8 @@ function dd(mixed $data)
     echo "</pre>";
     die(); // For optimizatoin
 }
+
+function e(mixed $value): string
+{
+    return htmlspecialchars((string) $value);
+}
