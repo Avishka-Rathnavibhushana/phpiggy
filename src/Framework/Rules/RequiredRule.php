@@ -13,6 +13,6 @@ class RequiredRule implements RuleInterface
 
     public function getMessage(array $data, string $field, array $params): string
     {
-        return "The {$field} field is required";
+        return "This field is required";
     }
 }
