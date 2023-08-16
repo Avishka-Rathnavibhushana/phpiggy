@@ -4,6 +4,8 @@ include __DIR__ . '/src/Framework/Database.php';
 
 use Framework\Database;
 
+echo "asd";
+
 $db = new Database(
     'mysql',
     [
@@ -15,4 +17,9 @@ $db = new Database(
     ''
 );
 
-echo "Connected to database!";
+$search = "Hats";
+$query = "SELECT * FROM products WHERE name='{$search}'";
+
+$stmt = $db->connection->query($query, PDO::FETCH_ASSOC);
+
+var_dump($stmt->fetchAll(PDO::FETCH_OBJ));
