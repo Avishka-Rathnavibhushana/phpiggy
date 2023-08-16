@@ -16,4 +16,6 @@ function registerRoutes(App $app)
     // In php  we can call classes and methods as strings
     $app->get('/register', [AuthController::class, 'registerView']);
     $app->post('/register', [AuthController::class, 'register']);
+    $app->get('/login', [AuthController::class, 'loginView']);
+    $app->post('/login', [AuthController::class, 'login']);
 }

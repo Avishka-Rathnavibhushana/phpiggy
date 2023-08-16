@@ -38,4 +38,23 @@ class UserService
             ]
         );
     }
+
+    public function login(array $form)
+    {
+        $user = $this->db->query(
+            "SELECT * FROM users WHERE email = :email",
+            ['email' => $form['email']]
+        )->find();
+
+        $passwordMatch = password_verify(
+            $form['password'],
+            $user['password'] ?? ''
+        );
+
+        if (!$user || !$passwordMatch) {
+            throw new ValidationException(['password' => 'Invalid credentils']);
+        }
+
+        $_SESSION['user'] = $user['id'];
+    }
 }
