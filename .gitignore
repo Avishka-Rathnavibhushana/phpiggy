@@ -1,2 +1,4 @@
 /vendor/
 .Ds_store
+.gitignore
+composer.phar
