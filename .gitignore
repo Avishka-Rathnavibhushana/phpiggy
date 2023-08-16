@@ -2,3 +2,4 @@
 .Ds_store
 .gitignore
 composer.phar
+.env
