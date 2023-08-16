@@ -18,8 +18,16 @@ $db = new Database(
 );
 
 $search = "Hats";
-$query = "SELECT * FROM products WHERE name='{$search}'";
+$query = "SELECT * FROM products WHERE name=?"; // method 1
+// $query = "SELECT * FROM products WHERE name=:name"; // method 2
 
-$stmt = $db->connection->query($query, PDO::FETCH_ASSOC);
+$stmt = $db->connection->prepare($query);
+
+// $stmt->bindValue(':name', $search, PDO::PARAM_STR); // method 3 -- here we do not need to pass parameter list to execute commands
+
+$stmt->execute(
+    [$search] // method 1
+    // [$name=>$search]// method 2
+);
 
 var_dump($stmt->fetchAll(PDO::FETCH_OBJ));
