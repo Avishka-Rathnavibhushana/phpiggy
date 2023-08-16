@@ -4,8 +4,6 @@ include __DIR__ . '/src/Framework/Database.php';
 
 use Framework\Database;
 
-echo "asd";
-
 $db = new Database(
     'mysql',
     [
@@ -17,17 +15,27 @@ $db = new Database(
     ''
 );
 
-$search = "Hats";
-$query = "SELECT * FROM products WHERE name=?"; // method 1
-// $query = "SELECT * FROM products WHERE name=:name"; // method 2
+try {
+    $db->connection->beginTransaction();
 
-$stmt = $db->connection->prepare($query);
+    $db->connection->query("INSERT INTO products VALUES (99, 'Gloves')");
 
-// $stmt->bindValue(':name', $search, PDO::PARAM_STR); // method 3 -- here we do not need to pass parameter list to execute commands
+    $search = "Hats";
+    $query = "SELECT * FROM products WHERE name=:name";
 
-$stmt->execute(
-    [$search] // method 1
-    // [$name=>$search]// method 2
-);
+    $stmt = $db->connection->prepare($query);
 
-var_dump($stmt->fetchAll(PDO::FETCH_OBJ));
+    $stmt->bindValue('name', 'Gloves', PDO::PARAM_STR);
+
+    $stmt->execute();
+
+    var_dump($stmt->fetchAll(PDO::FETCH_OBJ));
+
+    $db->connection->commit();
+} catch (Exception $error) {
+    if ($db->connection->inTransaction()) {
+        $db->connection->rollBack();
+    }
+
+    echo "Transaction failed!!\n{$error->getMessage()}";
+}
